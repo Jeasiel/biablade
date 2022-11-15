@@ -1,38 +1,72 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório</title>
-</head>
-<body>
+  </head>
+  <body>
+    <div id="cadastro">
+      <h2>Cadastro de Produto</h2>
+      <p>Nome: <input type="text" id="inputProduto"></p>
+      <p>Preço: <input type="number" id="inputPreco"></p>
+      <button onclick = "cadastroProdutos()">Cadastrar</button>
+    </div>
+
+    <h1>Relatório de vendas</h1>
+
+    <div id="allcontainers">
+      <div id="container0" class="cont">
+        <h3 style="text-transform:capitalize;"><produto>coxinhas</produto></h3>
+  
+        Quantas vendeu?<br/>
+        <input id="qntcoxinha" type = "number"/><br/>
+        <br/><br/>
+        <button onclick = "calculos()">Calcular</button>
+        <br/><br/>
+        A quantidade de <produto2>coxinhas</produto2> vendidas ao todo é: <resulcox></resulcox>
+        <br/><br/>
+      </div>
+    </div>
+    o lucro do dia é: <lucro></lucro>
+
+    <script>
+      var qntcoxinha = document.querySelector('#qntcoxinha')
+      var resultadocox = document.querySelector('resulcox')
+      var lucro = document.querySelector('lucro')
+
+      var produto = document.querySelector('produto')
+      var produto2 = document.querySelector('produto2')
+      var contador = 0
+
+      var nomeProduto = document.getElementById("inputProduto").value;
+      var preco = document.getElementById("inputPreco").value;
     
-<h1>Relatório de vendas</h1>
-<h3>Coxinha</h3>
+      function calculos(){
+        resultadocox.innerHTML =  Number(resultadocox.innerHTML) + Number(qntcoxinha.value)
+        lucro.innerHTML = Number(resultadocox.innerHTML) * 1.50
+      }
 
-Quantas vendeu?<br/>
-<input id="qntcoxinha" type = "number"/><br/>
-<br/><br/>
-<button onclick = "calculos()">Calcular</button>
-<br/><br/>
-a quantidade de coxinhas vendidas ao todo é: <resulcox></resulcox>
-<br/><br/>
-o lucro do dia é: <lucro></lucro>
-<script>
-    var qntcoxinha = document.querySelector('#qntcoxinha')
-    var resultadocox = document.querySelector('resulcox')
-    var lucro = document.querySelector('lucro')
-    
-    function calculos(){
-      resultadocox.innerHTML =  Number(resultadocox.innerHTML) + Number(qntcoxinha.value)
-      lucro.innerHTML = Number(resultadocox.innerHTML) * 1.50
-       
-    }
+      function cadastroProdutos(){
+        contador++
+        var containerDiv = document.getElementById("container0")
+        var divClone = containerDiv.cloneNode(true)
+        produto.innerHTML = 'cocadas'
+        produto2.innerHTML = 'cocadas'
+        divClone.id = "container"
+        divClone.class = "cont"
+        document.getElementById("allcontainers").appendChild(divClone)
+      }
+    </script>
 
+    <style type="text/css">
+      #container0, #container {
+        display: inline-block;
+        padding: 10px;
+      }
+    </style>
 
-</script>
-
-</body>
+  </body>
 </html>
