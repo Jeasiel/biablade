@@ -18,13 +18,13 @@
     <h1>Relatório de vendas</h1>
 
     <div id="allcontainers">
-      <div id="container0" class="cont">
+      <div id="container0">
         <h3 style="text-transform:capitalize;"><produto>coxinhas</produto></h3>
   
         Quantas vendeu?<br/>
-        <input id="qntcoxinha" type = "number"/><br/>
+        <input id="quantidade" type = "number"/><br/>
         <br/><br/>
-        <button onclick = "calculos()">Calcular</button>
+        <button onclick = "calculos()" value="">Calcular</button>
         <br/><br/>
         A quantidade de <produto2>coxinhas</produto2> vendidas ao todo é: <resulcox></resulcox>
         <br/><br/>
@@ -33,7 +33,7 @@
     o lucro do dia é: <lucro></lucro>
 
     <script>
-      var qntcoxinha = document.querySelector('#qntcoxinha')
+      var quantidade = document.querySelector('#quantidade')
       var resultadocox = document.querySelector('resulcox')
       var lucro = document.querySelector('lucro')
 
@@ -45,18 +45,20 @@
       var preco = document.getElementById("inputPreco").value;
     
       function calculos(){
-        resultadocox.innerHTML =  Number(resultadocox.innerHTML) + Number(qntcoxinha.value)
-        lucro.innerHTML = Number(resultadocox.innerHTML) * 1.50
+        resultadocox.innerHTML =  Number(resultadocox.innerHTML) + Number(quantidade.value)
+        lucro.innerHTML = Number(resultadocox.innerHTML) * Number(preco.value)
       }
 
       function cadastroProdutos(){
         contador++
         var containerDiv = document.getElementById("container0")
         var divClone = containerDiv.cloneNode(true)
+
         produto.innerHTML = 'cocadas'
         produto2.innerHTML = 'cocadas'
+        preco.value = 2
+
         divClone.id = "container"
-        divClone.class = "cont"
         document.getElementById("allcontainers").appendChild(divClone)
       }
     </script>

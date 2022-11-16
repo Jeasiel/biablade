@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório</title>
+</head>
+<body>
+    <div id="cadastro">
+        <h2>Cadastro de Produto</h2>
+        <p>Nome: <input type="text" id="inputProduto"></p>
+        <p>Preço: <input type="number" id="inputPreco"></p>
+        <button onclick = "cadastroProdutos()">Cadastrar</button>
+    </div>
+
+    <script>
+        nomeProd = document.getElementById('inputProduto')
+        precoProd = document.getElementById('inputPreco')
+
+        function cadastroProdutos(){
+            localStorage.setItem(nomeProd, precoProd);
+            
+        }
+    </script>
+</body>
+</html>
