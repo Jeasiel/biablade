@@ -16,12 +16,13 @@
 
     <div id="allContainer">
         <div id="container"> <!-- Container que vai ser criado -->
-            <p class="innerContainer" id="cont0"><produto class="produtoC"><produto/><input type="text" id="inputVendidos"> Valor da unidade: <valor class="valorC"><valor/></p>
+            <p class="innerContainer" id="cont0"><produto>Produto<produto/>: <input type="text" id="inputVendidos"> Valor da unidade: R$<valor>1.5<valor/></p>
         </div>
     </div>
 
     <div id="containerCalculo">
         <button onclick="CalcularTotal()">Calcular</button>
+        <p>Lucro: <lucro>00<lucro/></p>
     </div>
 
     <script>
@@ -29,9 +30,9 @@
         precoProd = document.getElementById('inputPreco')
         numProdVendidos = document.getElementById('inputVendidos')
 
-        function CadastroProdutos(){
+        /*function CadastroProdutos(){
             
-        }
+        }*/
 
         function CalcularTotal(){
             produto = document.getElementById('produto')
@@ -43,22 +44,15 @@
             }
         }
 
-        function Save(){
+        /*function Save(){
             localStorage.setItem(nomeProd, precoProd);
-        }
+        }*/
     </script>
 
     <style type="text/css">
         .innerContainer {
             padding: 8px;
             display: inline-block;
-            border-radius: 2px;
-            border-color: black;
-            border-style: solid;
-        }
-        #container {
-            padding: 16px;
-            margin: 8px;
             border-radius: 2px;
             border-color: black;
             border-style: solid;
