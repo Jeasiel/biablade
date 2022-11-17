@@ -11,17 +11,58 @@
         <h2>Cadastro de Produto</h2>
         <p>Nome: <input type="text" id="inputProduto"></p>
         <p>Preço: <input type="number" id="inputPreco"></p>
-        <button onclick = "cadastroProdutos()">Cadastrar</button>
+        <button onclick = "CadastroProdutos()">Cadastrar</button>
+    </div>
+
+    <div id="allContainer">
+        <div id="container"> <!-- Container que vai ser criado -->
+            <p class="innerContainer" id="cont0"><produto class="produtoC"><produto/><input type="text" id="inputVendidos"> Valor da unidade: <valor class="valorC"><valor/></p>
+        </div>
+    </div>
+
+    <div id="containerCalculo">
+        <button onclick="CalcularTotal()">Calcular</button>
     </div>
 
     <script>
         nomeProd = document.getElementById('inputProduto')
         precoProd = document.getElementById('inputPreco')
+        numProdVendidos = document.getElementById('inputVendidos')
 
-        function cadastroProdutos(){
-            localStorage.setItem(nomeProd, precoProd);
+        function CadastroProdutos(){
             
         }
+
+        function CalcularTotal(){
+            produto = document.getElementById('produto')
+            valor = document.getElementById('valor')
+
+            var produtosCad = document.getElementById('container').children;
+            for (i = 0; i <= produtosCad.length - 1; i++) {
+                var elementoProduto = document.getElementById('cont' + i)
+            }
+        }
+
+        function Save(){
+            localStorage.setItem(nomeProd, precoProd);
+        }
     </script>
+
+    <style type="text/css">
+        .innerContainer {
+            padding: 8px;
+            display: inline-block;
+            border-radius: 2px;
+            border-color: black;
+            border-style: solid;
+        }
+        #container {
+            padding: 16px;
+            margin: 8px;
+            border-radius: 2px;
+            border-color: black;
+            border-style: solid;
+        }
+    </style>
 </body>
 </html>
