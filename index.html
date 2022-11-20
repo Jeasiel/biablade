@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório</title>
 </head>
-<body>
+<body onload="LoadHTML()">
+    <h1 id="titulo">Relatório de Vendas</h1>
     <div id="cadastro">
         <h2>Cadastro de Produto</h2>
         <p>Nome: <input type="text" id="inputProduto" value=""></p>
@@ -14,13 +15,11 @@
         <button onclick = "CadastroProdutos()">Cadastrar</button>
         <button onclick="DeleteAll()">Deletar tudo</button>
     </div>
-
-    <div id="allContainer">
-    </div>
-
+    <h2>Produtos Cadastrados</h2>
+    <div id="allContainer"></div>
     <div id="containerCalculo">
         <button onclick="CalcularTotal()">Calcular</button>
-        <p>Lucro: R$ <lucro>0.0<lucro/></p>
+        <p>Lucro: R$ <lucro>0.00<lucro/></p>
     </div>
 
     <script>
@@ -46,10 +45,13 @@
             
             var div = document.createElement('DIV');
             div.id = "container" + contador
-            div.innerHTML = ('<p class="innerContainer"> '+ inputProd.value +': <input type="number" id="elementInputVend"> Valor da unidade: R$ <input type="number" id="elementVal" value="'+ inputPreco.value +'" readonly></p>')
+            div.className = "cont"
+            div.innerHTML = ('<p class="innerContainer"> '+ inputProd.value.toUpperCase() +': <input type="number" id="elementInputVend"> Valor da unidade: R$ <input type="number" id="elementVal" value="'+ Number(inputPreco.value).toFixed(2) +'" step="0.01" readonly></p>')
             document.getElementById('allContainer').appendChild(div)
             contador++
             localStorage.setItem("contador", contador)
+            inputProd.value = null
+            inputPreco.value = null
         }
 
         function CalcularTotal(){
@@ -71,7 +73,8 @@
                 var totalUn = quantidade * multiplicador
                 total += totalUn
             }
-            lucro.innerHTML = total
+            lucro.innerHTML = total.toFixed(2)
+            SaveHTML()
         }
 
         function DeleteAll(){
@@ -98,6 +101,15 @@
         #elementVal, #elementInputVend{
             width: 50px;
             display: inline-block;
+        }
+        #titulo{
+            text-align: center;
+        }
+        .cont{
+            height: 30px;
+        }
+        #allContainer{
+            padding-bottom: 30px;
         }
     </style>
 </body>
