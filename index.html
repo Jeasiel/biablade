@@ -9,53 +9,95 @@
 <body>
     <div id="cadastro">
         <h2>Cadastro de Produto</h2>
-        <p>Nome: <input type="text" id="inputProduto"></p>
-        <p>Preço: <input type="number" id="inputPreco"></p>
+        <p>Nome: <input type="text" id="inputProduto" value=""></p>
+        <p>Preço: <input type="number" step="0.01" id="inputPreco" value=""></p>
         <button onclick = "CadastroProdutos()">Cadastrar</button>
+        <button onclick="DeleteAll()">Deletar tudo</button>
     </div>
 
     <div id="allContainer">
-        <div id="container"> <!-- Container que vai ser criado -->
-            <p class="innerContainer" id="cont0"><produto>Produto<produto/>: <input type="text" id="inputVendidos"> Valor da unidade: R$<valor>1.5<valor/></p>
-        </div>
     </div>
 
     <div id="containerCalculo">
         <button onclick="CalcularTotal()">Calcular</button>
-        <p>Lucro: <lucro>00<lucro/></p>
+        <p>Lucro: R$ <lucro>0.0<lucro/></p>
     </div>
 
     <script>
-        nomeProd = document.getElementById('inputProduto')
-        precoProd = document.getElementById('inputPreco')
-        numProdVendidos = document.getElementById('inputVendidos')
+        
+        var lucro = document.querySelector('lucro')
+        var contador = 0
 
-        /*function CadastroProdutos(){
-            
-        }*/
+        function CadastroProdutos(){
+            /**
+            * @type HTMLInputElement
+            */
+            var inputProd = document.getElementById('inputProduto')
+            /**
+            * @type HTMLInputElement
+            */
+            var inputPreco = document.getElementById('inputPreco')
 
-        function CalcularTotal(){
-            produto = document.getElementById('produto')
-            valor = document.getElementById('valor')
-
-            var produtosCad = document.getElementById('container').children;
-            for (i = 0; i <= produtosCad.length - 1; i++) {
-                var elementoProduto = document.getElementById('cont' + i)
+            if(localStorage.getItem("contador")){
+                contador = localStorage.getItem("contador")
+            } else {
+                localStorage.setItem('contador', 0)
             }
+            
+            var div = document.createElement('DIV');
+            div.id = "container" + contador
+            div.innerHTML = ('<p class="innerContainer"> '+ inputProd.value +': <input type="number" id="elementInputVend"> Valor da unidade: R$ <input type="number" id="elementVal" value="'+ inputPreco.value +'" readonly></p>')
+            document.getElementById('allContainer').appendChild(div)
+            contador++
+            localStorage.setItem("contador", contador)
         }
 
-        /*function Save(){
-            localStorage.setItem(nomeProd, precoProd);
-        }*/
+        function CalcularTotal(){
+            var total = 0
+            var produtosCad = document.getElementById('allContainer').children
+            for (i = 0; i < produtosCad.length; i++) {
+                var quantidade = 0
+                var multiplicador = 0
+                /**
+                * @type HTMLInputElement
+                */
+                var inputQuant = document.querySelector("#container" + i).querySelector("#elementInputVend")
+                quantidade = inputQuant.value;
+                /**
+                * @type HTMLInputElement
+                */
+                var multiplier = document.querySelector("#container" + i).querySelector("#elementVal")
+                multiplicador = multiplier.value
+                var totalUn = quantidade * multiplicador
+                total += totalUn
+            }
+            lucro.innerHTML = total
+        }
+
+        function DeleteAll(){
+            localStorage.clear()
+            window.location.reload();
+        }
+
+        function SaveHTML(){
+            localStorage.setItem("Page", document.body.innerHTML)
+        }
+
+        function LoadHTML(){
+            if(localStorage.getItem("Page")){
+                document.body.innerHTML = localStorage.getItem("Page")
+            }
+        }
     </script>
 
     <style type="text/css">
         .innerContainer {
             padding: 8px;
             display: inline-block;
-            border-radius: 2px;
-            border-color: black;
-            border-style: solid;
+        }
+        #elementVal, #elementInputVend{
+            width: 50px;
+            display: inline-block;
         }
     </style>
 </body>
